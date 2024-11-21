@@ -3,3 +3,4 @@
 *.png
 data.json
 dataset.csv
+/*/node_modules
