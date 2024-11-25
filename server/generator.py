@@ -200,7 +200,7 @@ def get_roman_numerals():
 def build_model(m):
     if (m != 'major' and m != 'minor'):
         raise Exception("input string m is not equal to 'major' or 'minor'.")
-    df = pd.read_csv("server\dataset.csv") # pop chord progressions from https://github.com/ology/Data-Dataset-ChordProgressions/blob/master/share/Chord-Progressions.csv?plain=1
+    df = pd.read_csv("dataset.csv") # pop chord progressions from https://github.com/ology/Data-Dataset-ChordProgressions/blob/master/share/Chord-Progressions.csv?plain=1
     matrix = df.values
     progressions = []
     for entry in matrix:

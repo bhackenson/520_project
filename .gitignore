@@ -3,3 +3,4 @@
 *.png
 data.json
 dataset.csv
+__pycache__/
