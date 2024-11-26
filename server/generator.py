@@ -103,6 +103,13 @@ def chord_to_melody(chord):
         melody += extra_notes
     return melody
 
+def show_melody_notes(chord):
+    melody = [p for p in chord.pitchNames]
+    if ((len(chord.pitches)) < 4):
+        extra_notes = [j.name for j in [p.transpose(12) for p in chord.pitches[:(4-(len(chord.pitches)))]]] # pad melody so each chord has a 4-note melody (arpeggio)
+        melody += extra_notes
+    return melody
+
 def show_chord_name(chord):
     flat_symbol = '\u266D'
     sharp_symbol = '\u266F'
@@ -291,7 +298,7 @@ flattened_list = [item for sublist in new_progression for item in sublist]
 # plot_hist(history)
 # print([transpose_chord(c, tone, 'B-m') for c in chord_strings])
 # print([[pitch_to_vector(p) for p in chord_to_mel(t)] for t in [transpose_chord(c, tone, 'B-m') for c in chord_strings]])
-# print([chord_to_mel(t) for t in [transpose_chord(c, tone, "Am") for c in chord_strings]])
+# print([show_melody_notes(t) for t in [transpose_chord(c, tone, "Am") for c in chord_strings]])
 transposed_chords = [transpose_chord(c, tone, 'Dm') for c in chord_strings]
 transposed_melody = [chord_to_melody(t) for t in transposed_chords]
 create_midi_file(chords=transposed_chords,melody=transposed_melody,key_sig='Dm',time_sig='6/8',m_tempo=120)

@@ -4,3 +4,5 @@
 data.json
 dataset.csv
 __pycache__/
+db.json
+.env
