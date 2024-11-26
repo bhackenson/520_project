@@ -64,14 +64,12 @@ def login():
             db = json.load(file)
 
         for user in db.values():
-            print(user['username'])
             if user['username'] == username:
                 bytes = password.encode('utf-8')
                 salt = bcrypt.gensalt() 
                 hash = bcrypt.hashpw(bytes, salt)
                 user_pw_bytes = user['password'].encode('utf-8')
                 if bcrypt.checkpw(user_pw_bytes, hash):
-                    print("INSIDE")
                     # token = jwt.encode({"userid": user['id'], "exp": datetime.now(tz=timezone.utc) + datetime.timedelta(hours=1)}, os.getenv('JWT_KEY'), algorithm='HS256')
                     return jsonify({"status": "OK", "id": user['id']}), 200
                 else:
@@ -323,7 +321,6 @@ def delete_progression():
             return jsonify({"error": "could not find progression"}), 400
 
         progressions = next(proj for proj in db[userid]['projects'] if proj['id'] == projid)['progressions']
-        print(progressions)
         progressions = [p for p in progressions if p['id'] != progid]
         next(proj for proj in db[userid]['projects'] if proj['id'] == projid)['progressions'] = progressions
     
