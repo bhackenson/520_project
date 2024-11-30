@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+import json
 import secrets
 import jwt
 from jwt import ExpiredSignatureError, InvalidTokenError
@@ -39,11 +40,9 @@ history2 = None
 major_keys = ["G-", 'B', 'E', 'A', 'D', 'G', 'C', 'F', 'B-', 'E-', 'A-', 'D-']
 minor_keys = ['e-', 'g#', 'c#', 'f#', 'b', 'e', 'a', 'd', 'g', 'c', 'f', 'b-']
 
-"""
 with app.app_context():
     model1, tone1, history1 = build_model('major')
     model2, tone2, history2 = build_model('minor')
-"""
 
 @app.errorhandler(Exception)
 def handle_exception(e):
@@ -304,6 +303,164 @@ def delete_progression():
     user.save()
     
     return jsonify({"status": "OK", "progid": progid}), 200
+
+# request input: {"name": "prog_name", "key_signature": "B-", "mode": "major", "time_signature": "4/4", "tempo": 120}
+@app.route('/api/get_progression', methods=['POST'])
+@authenticate_user
+def get_progression():
+    data = request.get_json()
+    name = data['name']
+    key = data['key_signature']
+    mode = data['mode']
+    time_sig = data['time_signature']
+    tempo = data['tempo']
+
+    if (key not in major_keys and key not in minor_keys):
+        return jsonify({"error": "invalid key"}), 400
+    
+    if (key in major_keys):
+        new_prog, chord_strings = generate_chord_progression(model1, randomize_seed(tone1), 4)
+    else:
+        new_prog, chord_strings = generate_chord_progression(model2, randomize_seed(tone2), 4)
+    progression = {
+            "name": name,
+            "key_signature": key,
+            "mode": mode,
+            "time_signature": time_sig,
+            "tempo": tempo,
+            "chords": [show_chord_name(c) for c in [transpose_chord(k, tone2, key) for k in chord_strings]],
+            "melody": [show_melody_notes(c) for c in [transpose_chord(k, tone2, key) for k in chord_strings]]
+        }
+    
+    return jsonify({"status": "OK", "progression": progression}), 200
+
+"""
+request input:
+{
+   "projid": "proj_id",
+   "name": "new_prog_name",
+   "key_signature": "B-",
+   "mode": "minor",
+   "time_signature": "3/4",
+   "tempo": 100,
+   "chords": [
+       {
+           "chord": "C major triad",
+           "notes": ["C", "E", "G"]
+       },
+       {
+           "chord": "A minor triad",
+           "notes": ["A", "C", "E"]
+       }
+  ],
+  "melody": [
+  ["E3", "G3", "C4", "E4"],
+  ["C3", "E3", "A3", "C4"]
+  ]
+}
+"""
+@app.route('/api/send_progression', methods=['POST'])
+@authenticate_user
+def send_progression():
+    data = request.get_json()
+    projid = data['projid']
+    name = data['name']
+    key = data['key_signature']
+    mode = data['mode']
+    time_sig = data['time_signature']
+    tempo = data['tempo']
+    chords = data['chords']
+    melody = data['melody']
+
+    userid = request.user['userid']
+    
+    user = User.objects(userid=userid).first()
+    if user == None:
+        return jsonify({"error": "could not find user"}), 404
+    if not any(proj.projid == projid for proj in user.projects):
+        return jsonify({"error": "could not find project"}), 404
+    if (key not in major_keys and key not in minor_keys):
+        return jsonify({"error": "invalid key"}), 404
+    
+    user_project = next(project for project in user.projects if project.projid == projid)
+    progid = secrets.token_hex(16)
+
+    progression = Progression(progid=progid, name=name, key_signature=key, mode=mode, time_signature=time_sig, tempo=tempo, chords=chords, melody=melody)
+
+    user_project.progressions.append(progression)
+    user.save()
+
+    return jsonify({"status": "OK", "progid": progid, "progression": progression.to_json()}), 200
+
+"""
+request input:
+{
+   "progression1":
+        {
+            "chords": [
+                {
+                    "chord": "C major triad",
+                    "notes": ["C", "E", "G"]
+                },
+                {
+                    "chord": "A minor triad",
+                    "notes": ["A", "C", "E"]
+                }
+            ],
+            "melody": [
+            ["E3", "G3", "C4", "E4"],
+            ["C3", "E3", "A3", "C4"]
+            ]
+        },
+    "progression2":
+        {
+            "chords": [
+                {
+                    "chord": "C major triad",
+                    "notes": ["C", "E", "G"]
+                },
+                {
+                    "chord": "A minor triad",
+                    "notes": ["A", "C", "E"]
+                }
+            ],
+            "melody": [
+            ["E3", "G3", "C4", "E4"],
+            ["C3", "E3", "A3", "C4"]
+            ]
+        },
+    "naturalness": 5,
+    "accuracy": 5,
+    "inspiration": 5,
+    "comment": "comment here"
+}
+"""
+@app.route('/api/feedback', methods=['POST'])
+def feedback():
+    with open('feedback.json', 'r') as file:
+        db = json.load(file)
+    
+    data = request.get_json()
+    prog1 = data['progression1']
+    prog2 = data['progression2']
+    nat = data['naturalness']
+    acc = data['accuracy']
+    insp = data['inspiration']
+    comment = data['comment']
+    
+    db['feedback'].append({
+        "progression1": prog1,
+        "progression2": prog2,
+        "naturalness": nat,
+        "accuracy": acc,
+        "inspiration": insp,
+        "comment": comment
+    })
+
+    with open('feedback.json', 'w') as file:
+        json.dump(db, file, indent=4)
+
+    return jsonify({"status": "OK"}), 200
 
 if __name__ == '__main__':
     connect(host=os.getenv('DB'))

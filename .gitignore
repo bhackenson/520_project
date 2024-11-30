@@ -5,4 +5,5 @@ data.json
 dataset.csv
 __pycache__/
 db.json
+feedback.json
 .env
