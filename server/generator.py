@@ -223,8 +223,8 @@ def build_model(m):
     y_t = []
 
     for prog in prog_train:
-        X.append(prog[:3])  # First 7 chords as input
-        y.append(prog[1:])  # Last 7 chords as target
+        X.append(prog[:3])  # First 3 chords as input
+        y.append(prog[1:])  # Last 3 chords as target
     X = np.array(X)
     y = np.array(y)
 
