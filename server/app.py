@@ -59,7 +59,7 @@ def login():
             user_pw_bytes = user['password'].encode('utf-8')
             if bcrypt.checkpw(user_pw_bytes, hash):
                 # token = jwt.encode({"userid": user['id'], "exp": datetime.now(tz=timezone.utc) + datetime.timedelta(hours=1)}, os.getenv('JWT_KEY'), algorithm='HS256')
-                return jsonify({"status": "OK", "id": user['id']}), 200
+                return jsonify({"status": "OK", "username": user['username'], "userid": user['id']}), 200
             else:
                 return jsonify({"error": "Incorrect password"}), 400
             
@@ -86,7 +86,7 @@ def register():
     with open('db.json', 'w') as file:
         json.dump(db, file, indent=4)
 
-    return jsonify({"status": "OK", "user": db[id]}), 200
+    return jsonify({"status": "OK", "username": db[id]['username'], "userid": db[id]}), 200
 
 # request input: {"userid": "user_id", "name": "project_name", "date": "project_date"}
 @app.route('/api/create_project', methods=['POST'])
@@ -261,7 +261,7 @@ def delete_project():
     with open('db.json', 'w') as file:
         json.dump(db, file, indent=4)
 
-    return jsonify({"status": "OK", "projid": projid}), 400
+    return jsonify({"status": "OK", "projid": projid}), 200
 
 # request input: {"userid": "user_id", "projid": "proj_id", "progid": "prog_id"}
 @app.route('/api/delete_progression', methods=['PUT'])
