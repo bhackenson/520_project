@@ -21,7 +21,7 @@
                 //goto("/");
             }
             else {
-                console.log("Failed to fetch workouts.");
+                console.log("Failed to fetch projects.");
             }
             return;
         }
@@ -30,51 +30,8 @@
     });
   
     Store.subscribe((_projects) => {
-      projects = _workouts;
+      projects = _projects;
       console.log(`projects: ${JSON.stringify(_projects)}`);
     });
-    /*
-    const delete_wkt = async (wktid) => {
-        const res1 = await fetch(`http://localhost:4000/workouts/delete/${wktid}`, {
-          method: 'GET',
-          headers: { 
-            'Authorization':  `Bearer ${sessionStorage.getItem('jwt')}`},
-        });
-        if (!res1.ok) {
-          if (res1.status == 401) {
-            console.log("Unauthorized access.");
-            alert("Unauthorized access.")
-            sessionStorage.removeItem('jwt');
-            goto("/");
-          }
-          else {
-            console.log("Failed to delete workout.");
-          }
-          return;
-        }
-  
-        const res2 = await fetch(`http://localhost:4003/workouts`, {
-          method: 'GET',
-          headers: { 
-            'Authorization':  `Bearer ${sessionStorage.getItem('jwt')}`},
-        });
-        if (!res2.ok) {
-          if (res2.status == 401) {
-            console.log("Unauthorized access.");
-            alert("Unauthorized access.")
-            sessionStorage.removeItem('jwt');
-            goto("/");
-          }
-          else {
-            console.log("failed to fetch workouts.");
-          }
-          return;
-        }
-        const data2 = await res2.json();
-        Store.update((_workouts) => {
-            return data2;
-        })
-    }
-    */
   
   </script>

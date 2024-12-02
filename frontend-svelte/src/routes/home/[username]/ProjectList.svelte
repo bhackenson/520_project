@@ -22,7 +22,7 @@
                 //goto("/");
             }
             else {
-                console.log("Failed to fetch workouts.");
+                console.log("Failed to fetch projects.");
             }
             return;
         }
@@ -49,7 +49,7 @@
                 alert("Could not find user or project.")
             }
             else {
-                console.log("Failed to fetch workouts.");
+                console.log("Failed to fetch projects.");
             }
             return;
         }
@@ -69,7 +69,7 @@
                 //goto("/");
             }
             else {
-                console.log("Failed to fetch workouts.");
+                console.log("Failed to fetch projects.");
             }
             return;
         }
