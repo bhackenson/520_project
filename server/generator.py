@@ -104,9 +104,9 @@ def chord_to_melody(chord):
     return melody
 
 def show_melody_notes(chord):
-    melody = [p for p in chord.pitchNames]
+    melody = [p.replace("-", "b") + '4' for p in chord.pitchNames]
     if ((len(chord.pitches)) < 4):
-        extra_notes = [j.name for j in [p.transpose(12) for p in chord.pitches[:(4-(len(chord.pitches)))]]] # pad melody so each chord has a 4-note melody (arpeggio)
+        extra_notes = [j.name.replace("-", "b") + '4' for j in [p.transpose(12) for p in chord.pitches[:(4-(len(chord.pitches)))]]] # pad melody so each chord has a 4-note melody (arpeggio)
         melody += extra_notes
     return melody
 

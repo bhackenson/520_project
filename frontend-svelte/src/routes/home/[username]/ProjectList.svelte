@@ -4,6 +4,7 @@
     import { goto } from '$app/navigation'
   
     export let userid;
+    export let updateProj = (i) => {};
     let user = {};
 
     onMount(async () => {
@@ -84,11 +85,12 @@
 <ul class="project-list">
     {#each user['projects'] as p (p.id)}
         <div class='project-group'>
-            <li class="project">{p.name} | {p.date}</li>
+            <li class="project" on:click={() => {updateProj(p)}}>{p.name} | {p.date}</li>
             <input type='submit' class = "delete" value={"\u00D7"} on:click={() => delete_proj(p.id)}>
         </div>
     {/each}
 </ul>
+
 <style>
 .project-list {
     list-style: none;
