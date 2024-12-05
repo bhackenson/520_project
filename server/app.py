@@ -156,7 +156,7 @@ def generate_progression():
             "time_signature": time_sig,
             "tempo": tempo,
             "chords": [show_chord_name(c) for c in [transpose_chord(k, tone2, key) for k in chord_strings]],
-            "melody": [show_melody_notes(c) for c in [transpose_chord(k, tone2, key) for k in chord_strings]]
+            "melody": [show_melody_notes(c, time_sig) for c in [transpose_chord(k, tone2, key) for k in chord_strings]]
         }
 
     progressions.append(progression)
@@ -388,7 +388,7 @@ def get_progression():
             "time_signature": time_sig,
             "tempo": tempo,
             "chords": [show_chord_name(c) for c in [transpose_chord(k, tone2, key) for k in chord_strings]],
-            "melody": [show_melody_notes(c) for c in [transpose_chord(k, tone2, key) for k in chord_strings]]
+            "melody": [show_melody_notes(c, time_sig) for c in [transpose_chord(k, tone2, key) for k in chord_strings]]
         }
     
     return jsonify({"status": "OK", "progression": progression}), 200

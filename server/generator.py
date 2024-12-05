@@ -103,13 +103,20 @@ def chord_to_melody(chord):
         melody += extra_notes
     return melody
 
-def show_melody_notes(chord):
-    melody = [p.replace("-", "b") + '4' for p in chord.pitchNames]
-    if ((len(chord.pitches)) < 4):
-        extra_notes = [j.name.replace("-", "b") + '4' for j in [p.transpose(12) for p in chord.pitches[:(4-(len(chord.pitches)))]]] # pad melody so each chord has a 4-note melody (arpeggio)
-        melody += extra_notes
-    return melody
-
+def show_melody_notes(chord, time_sign):
+    if time_sign == "4/4":
+        melody = [p.replace("-", "b") + '4' for p in chord.pitchNames]
+        if ((len(chord.pitches)) < 4):
+            extra_notes = [j.name.replace("-", "b") + '4' for j in [p.transpose(12) for p in chord.pitches[:(4-(len(chord.pitches)))]]] # pad melody so each chord has a 4-note melody (arpeggio)
+            melody += extra_notes
+        return melody
+    if time_sign == "3/4" or time_sign == "6/8":
+        melody = [p.replace("-", "b") + '4' for p in chord.pitchNames]
+        if ((len(chord.pitches)) < 4):
+            extra_notes = [j.name.replace("-", "b") + '4' for j in [p.transpose(12) for p in chord.pitches[:(4-(len(chord.pitches)))]]] # pad melody so each chord has a 4-note melody (arpeggio)
+            melody += extra_notes
+        return melody[:-1]
+        
 def show_chord_name(chord):
     flat_symbol = '\u266D'
     sharp_symbol = '\u266F'
