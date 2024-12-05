@@ -10,8 +10,8 @@ Due to Mus(ai)c's nature as a web-app, since we are not currently hosting you ca
 
 After doing that, then open a new terminal and cd into the server folder and run 'python app.py'. Also in the server, make a new file called db.json with empty curly braces.
 
-## Configuration (?)
+<!-- ## Configuration (?) -->
 
-## Data Sets (?)
+<!-- ## Data Sets (?) -->
 
-## AI Models (?)
+<!-- ## AI Models (?) -->
