@@ -3,4 +3,4 @@
     import { page } from '$app/stores';
     let username = $page.params.username;
 </script>
-<ProjectEditor userid={sessionStorage.getItem('userid')}/>
+<ProjectEditor userid={sessionStorage.getItem('userid')} username={username}/>

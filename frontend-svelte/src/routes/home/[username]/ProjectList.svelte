@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import Store from './Store.js';
     import { goto } from '$app/navigation'
+	import StoreEval from './StoreEval.js';
   
     export let userid;
     export let updateProj = (i) => {};
@@ -18,7 +19,7 @@
         });
         if (!response.ok) {
             if (response.status == 400) {
-                alert("Could not find user.")
+                console.log("Could not find user to load projects.")
                 //sessionStorage.removeItem('jwt');
                 //goto("/");
             }
@@ -29,6 +30,7 @@
         }
       const data = await response.json();
       Store.set(data.user);
+      StoreEval.set({});
     });
   
     Store.subscribe((userdata) => {
@@ -65,7 +67,7 @@
         });
         if (!res2.ok) {
             if (response.status == 400) {
-                alert("Could not find user.")
+                console.log("Could not find user.")
                 //sessionStorage.removeItem('jwt');
                 //goto("/");
             }

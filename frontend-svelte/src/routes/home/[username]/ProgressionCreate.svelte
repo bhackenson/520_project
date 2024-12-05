@@ -1,8 +1,12 @@
 <script>
+    import Evaluation from './Evaluation.svelte';
     import * as Tone from 'tone';
+
     export let visible = false;
     export let close = () => {};
-    export let createProg = function(o) {return;};
+    export let getProgs = function(o) {return;};
+    export let userid;
+    export let project = {};
 
     let name = "";
     let key_signature = "C";
@@ -30,13 +34,18 @@
       sampler.triggerAttackRelease(chord, len);
     }
 
-    const submit = () => {
-        createProg({name, key_signature, mode, time_signature, tempo});
+    let isEvalVisible = false;
+    const closeEval = () => { isEvalVisible = false; }
+    const openEval = () => { isEvalVisible = true; }
+
+    const submit = async () => {
+        await getProgs({name, key_signature, mode, time_signature, tempo});
         name = "";
         key_signature = "C";
         mode = "major";
         time_signature = "4/4";
         tempo = 100;
+        openEval();
     }
 
     const selectTime = (time) => {
@@ -178,6 +187,7 @@
       </div>
         <div id="create-prog">
             <input type='submit' class="submit" value="Generate" on:click={submit} name="Create Progression">
+            <Evaluation visible={isEvalVisible} close={closeEval} userid={userid} currProj={project}/>
       </div>
     </div>
   </div>
@@ -204,11 +214,10 @@
 
 .time-sig {
   border-style: none;
-  font-size: 2rem;
-  padding: 1rem 1rem;
+  font-size: 1.5rem;
+  padding: 0.5rem 0.5rem;
   color: white;
   border-radius: 8px;
-  margin-bottom: 1rem;
   margin-left: 1rem;
   margin-right: 1rem;
   background: #90d3ff;
@@ -223,7 +232,10 @@
       width: 75%;
       display: block;
       background: white;
-      padding: 0.5rem;
+      padding-top: 0.2rem;
+      padding-bottom: 0.2rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       text-align: center;
@@ -320,7 +332,7 @@
       border-style: solid;
       border-radius: 8px;
       display: block;
-      width: 95%;
+      width: 99%;
       font-size: 1.125rem;
       padding: 1rem 0.25rem;
       margin-top: 1rem;
@@ -347,7 +359,7 @@
           display: block;
           width: 100%;
           font-size: 2rem;
-          padding: 1rem 1rem;
+          padding: 0.5rem 0.5rem;
           color: white;
           /* background-color: rgb(104, 75, 125); */
           border-radius: 8px;

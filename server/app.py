@@ -1,9 +1,10 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_file
+import os
 from flask_cors import CORS
 import json
 import secrets
 import bcrypt
-from generator import build_model, generate_chord_progression, randomize_seed, transpose_chord, show_chord_name, show_melody_notes
+from generator import build_model, generate_chord_progression, randomize_seed, transpose_chord, show_chord_name, show_melody_notes, create_midi_from_progression
 
 app = Flask(__name__)
 CORS(app)
@@ -79,6 +80,10 @@ def register():
 
     with open('db.json', 'r') as file:
         db = json.load(file)
+
+    for user in db.values():
+        if user['username'] == username:
+            return jsonify({"error": "username already exists."}), 404
 
     id = secrets.token_hex(16)
     db[id] = {"id": id, "username": username, "password": password, "projects": []}
@@ -462,6 +467,60 @@ def feedback():
         json.dump(db, file, indent=4)
 
     return jsonify({"status": "OK"}), 200
+
+
+"""
+request input:
+{
+   "userid": "user_id",
+   "progression":
+        {
+            "key_signature": "B-",
+            "mode": "minor",
+            "time_signature": "3/4",
+            "tempo": 100,
+            "chords": [
+                {
+                    "chord": "C major triad",
+                    "notes": ["C", "E", "G"]
+                },
+                {
+                    "chord": "A minor triad",
+                    "notes": ["A", "C", "E"]
+                }
+            ],
+            "melody": [
+            ["E3", "G3", "C4", "E4"],
+            ["C3", "E3", "A3", "C4"]
+            ]
+        }
+}
+"""
+@app.route('/api/send_midi', methods=['POST'])
+def send_midi():
+    data = request.get_json()
+    userid = data['userid']
+    progression = data['progression']
+    file_path = "output.mid"
+
+    with open('db.json', 'r') as file:
+        db = json.load(file)
+
+    if (userid not in db):
+        return jsonify({"error": "could not find user"}), 400
+    
+    create_midi_from_progression(chords=progression['chords'],
+                                 melody=progression['melody'],
+                                 key_sig=progression['key_signature'],
+                                 time_sig=progression['time_signature'],
+                                 m_tempo=progression['tempo'],
+                                 path=file_path)
+
+    print("made it")
+    if os.path.exists(file_path):
+        return send_file(file_path, as_attachment=True, download_name="export.mid")
+    else:
+        return jsonify({"status": "cannnot create file"}), 501
 
 if __name__ == '__main__':
     app.run(debug=True)

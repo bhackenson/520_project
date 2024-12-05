@@ -13,7 +13,7 @@
             alert("Passwords do not match.")
             return;
         }
-        const response = await fetch('http://localhost:5000/api/register', {
+        const response = await fetch('http://localhost:5000/api/create_user', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -27,12 +27,12 @@
         if (response.ok) {
             const data = await response.json();
             sessionStorage.setItem('userid', data.userid);
-            goto(`/home/${data.username}`);
+            goto(`/login`);
             alert("User added!")
         }
         else {
-            if (response.status == 400) {
-                alert ("username already exists in the database.")
+            if (response.status == 404) {
+                alert ("Username already exists.")
             }
             else {
                 goto(`/`);

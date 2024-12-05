@@ -188,7 +188,7 @@
         });
         if (!res2.ok) {
             if (response.status == 400) {
-                alert("Could not find user.")
+                console.log("Could not find user.")
                 //sessionStorage.removeItem('jwt');
                 //goto("/");
             }
@@ -203,6 +203,36 @@
         })
     }
 
+    const createMidiFile = async (prog_obj) => {
+        const response = await fetch('http://localhost:5000/api/send_midi', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            mode: 'cors',
+            body: JSON.stringify({userid, "progression": prog_obj})
+        });
+        if (!response.ok) {
+            if (response.status == 400) {
+                alert("Error creating MIDI file.")
+            }
+            else {
+                console.log({"status": response.status, "message": "Error creating MIDI file."});
+            }
+            return;
+        }
+
+        const blob = await response.blob();
+        const URL = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = URL;
+        a.download = "export.mid";
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(URL);
+    };
+
 
 </script>
 {#each project['progressions'] as prog (prog.id)}
@@ -212,7 +242,7 @@
             <SheetMusic data={prog} />
             <div class="actions">
                 <button class="play-btn" on:click={() => playProg(prog['chords'], prog['melody'], prog['time_signature'], prog['tempo'])}>play</button>
-                <button class="export-btn">export</button>
+                <button class="export-btn" on:click={() => createMidiFile(prog)}>export</button>
                 <button class="delete-btn" on:click={() => delete_prog(prog['id'])}>delete</button>
                 <!-- <button class="play-btn" on:click={() => delete_prog(prog['id'])}>delete</button> -->
             </div>

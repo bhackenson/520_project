@@ -178,6 +178,65 @@ def create_midi_file(chords, melody, key_sig, time_sig='4/4', m_tempo=120, path=
     mf.close()
     return
 
+
+def create_midi_from_progression(chords, melody, key_sig, time_sig='4/4', m_tempo=120, path="output.mid"):
+    score = stream.Score()
+    part = stream.Part()
+    mel = stream.Part()
+    score.append(mel)
+    score.append(part)
+
+    chord_objs = [chord.Chord(c['notes']) for c in chords]
+
+    for m in melody:
+        if time_sig == '3/4':
+            for i in range(len(m)-1):
+                n = note.Note(m[i])
+                n.duration = duration.Duration('quarter')
+                mel.append(n)
+        elif time_sig == '4/4':
+            for p in m:
+                n = note.Note(p)
+                n.duration = duration.Duration('eighth')
+                mel.append(n)
+        elif time_sig == '6/8':
+            for i in range(len(m)-1):
+                n = note.Note(m[i])
+                n.duration = duration.Duration('eighth')
+                mel.append(n)
+    
+    for c in chord_objs:
+        root_note = c.root()
+        # root_note.octave -= 1 # bass note
+        c.add(root_note)
+        c.transpose(-12, inPlace=True)
+        if time_sig == '3/4':
+            c.duration.quarterLength = 3
+        elif time_sig == '4/4':
+            c.duration = duration.Duration('half')
+        elif time_sig == '6/8':
+            c.duration.quarterLength = 1.5
+        part.append(c)
+        """
+        rn = roman.romanNumeralFromChord(c, key.Key(key_sig))
+        rn.duration = c.duration
+        part.append(rn)
+        """
+
+    part.timeSignature = meter.TimeSignature(time_sig)
+
+    ks = key.KeySignature(key.Key(key_sig).sharps)
+    part.insert(0, ks)
+
+    new_tempo = tempo.MetronomeMark(number=m_tempo)
+    part.insert(0, new_tempo)
+
+    mf = midi.translate.music21ObjectToMidiFile(score)
+    mf.open(path, 'wb')
+    mf.write()
+    mf.close()
+    return
+
 def get_roman_numerals():
     # C major (no vii-dim)
     I = np.array([1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0]) # Cmaj

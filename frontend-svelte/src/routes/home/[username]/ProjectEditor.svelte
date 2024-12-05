@@ -4,8 +4,11 @@
     import ProjectList from "./ProjectList.svelte";
     import ProgressionList from "./ProgressionList.svelte";
     import Store from "./Store.js";
+	import StoreEval from "./StoreEval.js";
+	import { goto } from "$app/navigation";
 
     export let userid;
+    export let username;
 
     let isProjectCreateVisible = false;
     let isProgCreateVisible = false;
@@ -42,7 +45,7 @@
         });
         if (!response.ok) {
             if (response.status == 400) {
-                alert("Could not find user.")
+                console.log("Could not find user.")
             }
             else {
                 console.log("Failed to find user.");
@@ -60,7 +63,7 @@
         });
         if (!res2.ok) {
             if (response.status == 400) {
-                alert("Could not find user.")
+                console.log("Could not find user.")
                 //sessionStorage.removeItem('jwt');
                 //goto("/");
             }
@@ -76,26 +79,56 @@
         isProjectCreateVisible = false;
     }
 
-    const create_prog = async (obj) => {
+    const get_progs = async (obj) => {
         const {name, key_signature, mode, time_signature, tempo} = obj;
-        const response = await fetch('http://localhost:5000/api/create_progression', {
+        const response1 = await fetch('http://localhost:5000/api/get_progression', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             mode: 'cors',
-            body: JSON.stringify({userid, "projid": currProj['id'], name, key_signature, mode, time_signature, tempo})
+            body: JSON.stringify({userid, name, key_signature, mode, time_signature, tempo})
         });
-        if (!response.ok) {
-            if (response.status == 400) {
+        if (!response1.ok) {
+            if (response1.status == 400) {
                 alert("Error creating progression.")
             }
             else {
                 console.log("Error creating progression.");
             }
-            return;
+
         }
+        const response2 = await fetch('http://localhost:5000/api/get_progression', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            mode: 'cors',
+            body: JSON.stringify({userid, name, key_signature, mode, time_signature, tempo})
+        });
+        if (!response2.ok) {
+            if (response2.status == 400) {
+                alert("Error creating progression.")
+            }
+            else {
+                console.log("Error creating progression.");
+            }
+
+        }
+        const data1 = await response1.json()
+        const data2 = await response2.json()
+        StoreEval.update((progs) => {
+            return {prog1: data1.progression, prog2: data2.progression}
+        })
+
+            //return data.progression;
+    }
+
+    const logout = () => {
+        goto('/')
+    }
   
+        /*
         const res2 = await fetch('http://localhost:5000/api/get_user', {
             method: 'POST',
             headers: {
@@ -119,19 +152,19 @@
         Store.update((userata) => {
             return data2.user;
         })
-        isProgCreateVisible = false;
-    }
+        */
     
 </script>
     <!-- main container -->
     <div class="container">
         <header>
-            <div class="button" id='share-proj'>share project</div>
+            <!-- <div class="button" id='share-proj'>logout</div> -->
+            <input type="submit" class="button" id="share-proj" value="Logout" on:click={logout}/>
             <div class=title>
                 <div id="musaic">mus(ai)c</div>
                 <div id="ai-powered">an ai-powered music application</div>
             </div>
-            <div class="button" id='account-info'>account info</div>
+            <div id='account-info'><b>Hi, {username}</b></div>
         </header>
 
         <!-- main content section -->
@@ -139,7 +172,7 @@
             <!-- projects section -->
             <div class="projects-section">
                 <div class="header">
-                    <div class="projects-text">projects</div>
+                    <div class="projects-text">Projects</div>
                     <button class="add-btn" on:click={openProjectCreate}>+</button>
                     <ProjectCreate visible={isProjectCreateVisible} closeProjectCreate={closeProjectCreate} createProject={create_proj}/>
                 </div>
@@ -149,9 +182,9 @@
             <!-- progressions section -->
             <div class="progressions-section">
                 <div class="header">
-                    <div class="progressions-text">progressions</div>
+                    <div class="progressions-text">Progressions</div>
                     <button class="add-btn" on:click={openProgCreate}>+</button>
-                    <ProgressionCreate visible={isProgCreateVisible} close={closeProgCreate} createProg={create_prog}/>
+                    <ProgressionCreate visible={isProgCreateVisible} close={closeProgCreate} getProgs={get_progs} userid={userid} project={currProj}/>
                 </div>
 
                 <ProgressionList userid={userid} project={currProj}/>
@@ -200,6 +233,8 @@ header {
 
 #account-info {
     margin-left: 80%;
+    font-size: xx-large;
+    color: #185D8B;
 }
 
 header .button {
@@ -211,6 +246,7 @@ header .button {
     border-radius: 5px;
     border: none;
     cursor: pointer;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .main-content {
