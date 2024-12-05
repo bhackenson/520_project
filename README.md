@@ -6,6 +6,8 @@ Mus(ai)c is an AI-powered music application where users can create projects and 
 
 ## Install
 
+Due to Mus(ai)c's nature as a web-app, since we are not currently hosting you can run a locally hosted version by cloning this repo, navigating to "frontend-svelte", and then execute `npm i`. Once everything is installed, execute `npm run dev`.
+
 ## Configuration (?)
 
 ## Data Sets (?)
