@@ -1,4 +1,4 @@
-### MUS(AI)C
+# MUS(AI)C
 
 ## Introduction
 
