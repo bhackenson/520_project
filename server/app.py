@@ -1,9 +1,10 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_file
+import os
 from flask_cors import CORS
 import json
 import secrets
 import bcrypt
-from generator import build_model, generate_chord_progression, randomize_seed, transpose_chord, show_chord_name, show_melody_notes
+from generator import build_model, generate_chord_progression, randomize_seed, transpose_chord, show_chord_name, show_melody_notes, create_midi_from_progression
 
 app = Flask(__name__)
 CORS(app)
@@ -59,7 +60,7 @@ def login():
             user_pw_bytes = user['password'].encode('utf-8')
             if bcrypt.checkpw(user_pw_bytes, hash):
                 # token = jwt.encode({"userid": user['id'], "exp": datetime.now(tz=timezone.utc) + datetime.timedelta(hours=1)}, os.getenv('JWT_KEY'), algorithm='HS256')
-                return jsonify({"status": "OK", "id": user['id']}), 200
+                return jsonify({"status": "OK", "username": user['username'], "userid": user['id']}), 200
             else:
                 return jsonify({"error": "Incorrect password"}), 400
             
@@ -80,13 +81,17 @@ def register():
     with open('db.json', 'r') as file:
         db = json.load(file)
 
+    for user in db.values():
+        if user['username'] == username:
+            return jsonify({"error": "username already exists."}), 404
+
     id = secrets.token_hex(16)
     db[id] = {"id": id, "username": username, "password": password, "projects": []}
 
     with open('db.json', 'w') as file:
         json.dump(db, file, indent=4)
 
-    return jsonify({"status": "OK", "user": db[id]}), 200
+    return jsonify({"status": "OK", "username": db[id]['username'], "userid": db[id]}), 200
 
 # request input: {"userid": "user_id", "name": "project_name", "date": "project_date"}
 @app.route('/api/create_project', methods=['POST'])
@@ -156,7 +161,7 @@ def generate_progression():
             "time_signature": time_sig,
             "tempo": tempo,
             "chords": [show_chord_name(c) for c in [transpose_chord(k, tone2, key) for k in chord_strings]],
-            "melody": [show_melody_notes(c) for c in [transpose_chord(k, tone2, key) for k in chord_strings]]
+            "melody": [show_melody_notes(c, time_sig) for c in [transpose_chord(k, tone2, key) for k in chord_strings]]
         }
 
     progressions.append(progression)
@@ -261,7 +266,7 @@ def delete_project():
     with open('db.json', 'w') as file:
         json.dump(db, file, indent=4)
 
-    return jsonify({"status": "OK", "projid": projid}), 400
+    return jsonify({"status": "OK", "projid": projid}), 200
 
 # request input: {"userid": "user_id", "projid": "proj_id", "progid": "prog_id"}
 @app.route('/api/delete_progression', methods=['PUT'])
@@ -388,7 +393,7 @@ def get_progression():
             "time_signature": time_sig,
             "tempo": tempo,
             "chords": [show_chord_name(c) for c in [transpose_chord(k, tone2, key) for k in chord_strings]],
-            "melody": [show_melody_notes(c) for c in [transpose_chord(k, tone2, key) for k in chord_strings]]
+            "melody": [show_melody_notes(c, time_sig) for c in [transpose_chord(k, tone2, key) for k in chord_strings]]
         }
     
     return jsonify({"status": "OK", "progression": progression}), 200
@@ -462,6 +467,60 @@ def feedback():
         json.dump(db, file, indent=4)
 
     return jsonify({"status": "OK"}), 200
+
+
+"""
+request input:
+{
+   "userid": "user_id",
+   "progression":
+        {
+            "key_signature": "B-",
+            "mode": "minor",
+            "time_signature": "3/4",
+            "tempo": 100,
+            "chords": [
+                {
+                    "chord": "C major triad",
+                    "notes": ["C", "E", "G"]
+                },
+                {
+                    "chord": "A minor triad",
+                    "notes": ["A", "C", "E"]
+                }
+            ],
+            "melody": [
+            ["E3", "G3", "C4", "E4"],
+            ["C3", "E3", "A3", "C4"]
+            ]
+        }
+}
+"""
+@app.route('/api/send_midi', methods=['POST'])
+def send_midi():
+    data = request.get_json()
+    userid = data['userid']
+    progression = data['progression']
+    file_path = "output.mid"
+
+    with open('db.json', 'r') as file:
+        db = json.load(file)
+
+    if (userid not in db):
+        return jsonify({"error": "could not find user"}), 400
+    
+    create_midi_from_progression(chords=progression['chords'],
+                                 melody=progression['melody'],
+                                 key_sig=progression['key_signature'],
+                                 time_sig=progression['time_signature'],
+                                 m_tempo=progression['tempo'],
+                                 path=file_path)
+
+    print("made it")
+    if os.path.exists(file_path):
+        return send_file(file_path, as_attachment=True, download_name="export.mid")
+    else:
+        return jsonify({"status": "cannnot create file"}), 501
 
 if __name__ == '__main__':
     app.run(debug=True)
