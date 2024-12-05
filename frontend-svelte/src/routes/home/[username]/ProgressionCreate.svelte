@@ -7,8 +7,8 @@
     let name = "";
     let key_signature = "C";
     let mode = "major";
-    let time_signature = "";
-    let tempo = "";
+    let time_signature = "4/4";
+    let tempo = 100;
 
     let key_name = key_signature.replace("-", '\u266D').replace("#", '\u266F');
 
@@ -31,12 +31,16 @@
     }
 
     const submit = () => {
-        createProg({name, key_signature, mode, time_signature, "tempo": parseInt(tempo)});
+        createProg({name, key_signature, mode, time_signature, tempo});
         name = "";
-        key_signature = "";
-        mode = "";
-        time_signature = "";
-        tempo = "";
+        key_signature = "C";
+        mode = "major";
+        time_signature = "4/4";
+        tempo = 100;
+    }
+
+    const selectTime = (time) => {
+      time_signature = time;
     }
 
     const selectKey = (key) => {
@@ -129,7 +133,7 @@
       <h2 id="title">Create Progression</h2>
       <div id="enter-progression">
         <input type="text" class="input" bind:value={name} name="prog_name" placeholder="Enter progression name">
-        <p id="key-sig-title">Key signature: {key_name+ " " + mode}</p><!-- <input type="text" class="input" bind:value={key_signature} name="key_signature" placeholder="Enter key signature">  -->
+        <p class="sig-title">Key signature: {key_name+ " " + mode}</p><!-- <input type="text" class="input" bind:value={key_signature} name="key_signature" placeholder="Enter key signature">  -->
         <div class="wheels">
           <div class="circle-container">
             <div class="slice" id="G-" on:click={() => selectKey("G-")}><p class="key k1"><b>G&#9837;/F&#9839;</b></p></div>
@@ -163,8 +167,14 @@
           </div>
         </div>
         <!-- <input type="text" class="input" bind:value={mode} name="mode" placeholder="Enter mode"> -->
-        <input type="text" class="input" bind:value={time_signature} name="time_signature" placeholder="Enter time signature">
-        <input type="text" class="input" bind:value={tempo} name="tempo" placeholder="Enter tempo">
+        <!-- <input type="" class="input" bind:value={time_signature} name="time_signature" placeholder="Enter time signature"> -->
+        <p class="sig-title">Time signature: {time_signature}</p>
+        <div class="time-sigs">
+          <input type='button' class="time-sig" value="4/4" on:click={() => selectTime("4/4")} name="4/4">
+          <input type='button' class="time-sig" value="3/4" on:click={() => selectTime("3/4")} name="3/4">
+          <input type='button' class="time-sig" value="6/8" on:click={() => selectTime("6/8")} name="6/8">
+        </div>
+        <input type="number" min="24" max="200" class="input" bind:value={tempo} name="tempo" placeholder="Enter tempo">
       </div>
         <div id="create-prog">
             <input type='submit' class="submit" value="Generate" on:click={submit} name="Create Progression">
@@ -180,11 +190,30 @@
       color: #0F3A57;
   }
 
-  #key-sig-title {
+  .sig-title {
     color: #0F3A57;
-    font-size: x-large;
+    font-size: large;
   }
+.time-sigs {
+  display: flex;
+  margin-top: 1rem;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
 
+.time-sig {
+  border-style: none;
+  font-size: 2rem;
+  padding: 1rem 1rem;
+  color: white;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  background: #90d3ff;
+  cursor: pointer;
+}
   .wheels {
       display: flex;
       justify-content: center;
@@ -194,7 +223,7 @@
       width: 75%;
       display: block;
       background: white;
-      padding: 1rem;
+      padding: 0.5rem;
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       text-align: center;
