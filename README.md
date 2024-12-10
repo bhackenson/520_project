@@ -13,7 +13,7 @@ Due to Mus(ai)c's nature as a web-app, since we are not currently hosting you ca
 > 2. `npm i`
 > 3. `npm run dev`
 
-After doing that, open a new terminal and `cd` into the `server` folder. Make a new file called `db.json` with empty curly braces. Create and activate a [virtual environment](https://python.land/virtual-environments/virtualenv) for Python, and then execute `pip install -r requirements.txt`. After that, run `python app.py`. Open the `localhost` link in your browser.
+After doing that, open a new terminal and `cd` into the `server` folder. Make a new file called `db.json` with empty curly braces. Create and activate a [virtual environment](https://python.land/virtual-environments/virtualenv) for Python or [conda environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html), and then execute `pip install -r requirements.txt`. After that, run `python app.py`. Open the `localhost` link in your browser.
 
 > ### Terminal Commands
 > 1. `cd server`
