@@ -1,14 +1,14 @@
 # Contributions
 
-Soniya Gaikwad
-- Worked on the `ui-design` folder that consists of all the baseline HTML and CSS code for the application that is later implemented in the `frontend-svelte` folder using Figma (https://www.figma.com/design/g7HDzd1IFFMkCYCwEtCxLy/Mus(ai)c-UI---COMPSCI520?node-id=6-2&node-type=canvas)
-- Worked on the Presentation Slides (https://docs.google.com/presentation/d/1FeDPJGiS6mcSV5RTQD97QPQPcg_DqkfDDEI-0ZKV8SM/edit?usp=sharing) for the Project Proposal Meeting and Final Project Fair
+### Soniya Gaikwad
+- Worked on the `ui-design` folder that consists of all the baseline HTML and CSS code for the application that is later implemented in the `frontend-svelte` folder using [Figma](https://www.figma.com/design/g7HDzd1IFFMkCYCwEtCxLy/Mus(ai)c-UI---COMPSCI520?node-id=6-2&node-type=canvas)
+- Worked on the [Presentation Slides](https://docs.google.com/presentation/d/1FeDPJGiS6mcSV5RTQD97QPQPcg_DqkfDDEI-0ZKV8SM/edit?usp=sharing) for the Project Proposal Meeting and Final Project Fair
 
-Bret Hackenson
+### Bret Hackenson
 - 
 
-Sreya Nimmagadda
+### Sreya Nimmagadda
 - 
 
-Craig Bilelis
+### Craig Bilelis
 - 
