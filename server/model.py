@@ -1,10 +1,12 @@
 from mongoengine import Document, EmbeddedDocument, StringField, IntField, EmbeddedDocumentField, ListField
 import bcrypt
 
+# chord info
 class Chord(EmbeddedDocument):
     chord = StringField(required=True)
     notes = ListField(StringField(), required=True)
 
+# progression info
 class Progression(EmbeddedDocument):
     progid = StringField(required=True)
     name = StringField(required=True)
@@ -16,12 +18,14 @@ class Progression(EmbeddedDocument):
     chords = ListField(EmbeddedDocumentField(Chord))
     melody = ListField(ListField(StringField()))
 
+# project info
 class Project(EmbeddedDocument):
     projid = StringField(required=True)
     name = StringField(required=True)
     date = StringField(required=True)
     progressions = ListField(EmbeddedDocumentField(Progression), default=[])
 
+# user info
 class User(Document):
     userid = StringField(required=True)
     username = StringField(required=True, max_length=50)
