@@ -91,7 +91,7 @@ class TestApp(unittest.TestCase):
         response = self.client.post('/api/create_project', json={
             'userid': userid,
             'name': 'Test Project',
-            'date': '2024-01-01'
+            'date': '2024-12-09'
         })
         
         print("Create Project Response:", response.data)
@@ -100,7 +100,7 @@ class TestApp(unittest.TestCase):
         data = json.loads(response.data)
         self.assertIn('project', data)
         self.assertEqual(data['project']['name'], 'Test Project')
-        project_id = data['project']['id']
+        #project_id = data['project']['id']
 
     # test progression generation
     def test_generate_progression(self):
