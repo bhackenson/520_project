@@ -1,5 +1,5 @@
 *.mid
-.venv
+/*/venv
 *.png
 data.json
 dataset.csv
