@@ -29,6 +29,7 @@ def handle_exception(e):
     return jsonify({'error': 'Unexpected error', 'description': str(e)}), 500
 
 # request input: {"userid": "user_id"}
+# get user
 @app.route('/api/get_user', methods=['POST'])
 def get_user():
     data = request.get_json()
@@ -43,6 +44,7 @@ def get_user():
     return jsonify({"status": "OK", "user": db[userid]}), 200
 
 # request input: {"username": "username", "password": "password"}
+# log in the user
 @app.route('/api/login', methods=['POST'])
 def login():
     data = request.get_json()
@@ -66,12 +68,14 @@ def login():
             
     return jsonify({"error": "username does not exist"}), 400
 
+# log out the user
 @app.route('/api/logout', methods=['POST'])
 def logout():
     # remove token here
     return jsonify({"status": "OK"}), 200
 
 # request input: {"username": "username", "password": "password"}
+# sign up/register the user
 @app.route('/api/create_user', methods=['POST'])
 def register():
     data = request.get_json()
@@ -94,6 +98,7 @@ def register():
     return jsonify({"status": "OK", "username": db[id]['username'], "userid": db[id]}), 200
 
 # request input: {"userid": "user_id", "name": "project_name", "date": "project_date"}
+# creating a new project
 @app.route('/api/create_project', methods=['POST'])
 def create_project():
     data = request.get_json()
@@ -123,6 +128,7 @@ def create_project():
     return jsonify({"status": "OK", "project": project}), 200
 
 # request input: {"userid": "user_id", "projid": "proj_id", "name": "prog_name", "key_signature": "B-", "mode": "major", "time_signature": "4/4", "tempo": 120}
+# creating a progression in the project
 @app.route('/api/create_progression', methods=['POST'])
 def generate_progression():
     data = request.get_json()
@@ -198,6 +204,7 @@ request input:
   ]
 }
 """
+# updating the progression in the project
 @app.route('/api/update_progression', methods=['PUT'])
 def update_progression():
     data = request.get_json()
@@ -245,6 +252,7 @@ def update_progression():
     return jsonify({"status": "OK", "new_progression": new_progression})
 
 # request input: {"userid": "user_id", "projid": "proj_id"}
+# deleting a project
 @app.route('/api/delete_project', methods=['PUT'])
 def delete_project():
     data = request.get_json()
@@ -269,6 +277,7 @@ def delete_project():
     return jsonify({"status": "OK", "projid": projid}), 200
 
 # request input: {"userid": "user_id", "projid": "proj_id", "progid": "prog_id"}
+# deleting a progression from the project
 @app.route('/api/delete_progression', methods=['PUT'])
 def delete_progression():
     data = request.get_json()
@@ -321,6 +330,7 @@ request input:
   ]
 }
 """
+# sending a progression from the project
 @app.route('/api/send_progression', methods=['POST'])
 def send_progression():
     data = request.get_json()
@@ -364,6 +374,7 @@ def send_progression():
     return jsonify({"status": "OK", "progid": progid, "progression": progression}), 200
 
 # request input: {"userid": "user_id", "name": "prog_name", "key_signature": "B-", "mode": "major", "time_signature": "4/4", "tempo": 120}
+# get progression
 @app.route('/api/get_progression', methods=['POST'])
 def get_progression():
     data = request.get_json()
@@ -441,6 +452,7 @@ request input:
     "comment": "comment here"
 }
 """
+# feedback evaluation
 @app.route('/api/feedback', methods=['POST'])
 def feedback():
     with open('feedback.json', 'r') as file:
@@ -496,6 +508,7 @@ request input:
         }
 }
 """
+# midi file creation
 @app.route('/api/send_midi', methods=['POST'])
 def send_midi():
     data = request.get_json()
