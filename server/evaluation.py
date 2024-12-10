@@ -9,6 +9,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import re
 
+# plot for training and validation loss
 def plot_hist(hist, output='hist.png'):
     plt.plot(hist.history['loss'], label='Training Loss')
     plt.plot(hist.history['val_loss'], label='Validation Loss')
@@ -18,10 +19,12 @@ def plot_hist(hist, output='hist.png'):
     plt.title('Training and Validation Loss')
     plt.savefig(output)
 
+# get accuracy
 def print_accuracy(y_pred, y_test):
     accuracy = np.mean(np.all(y_pred == y_test, axis=1))
     print(f"accuracy: {accuracy:.2%}")
 
+# confusion matrix for chord prediction
 def plot_conf_matrix(y_pred, y_test):
     conf_matrix = confusion_matrix(y_pred, y_test)
     sns.heatmap(conf_matrix, annot=True, cmap="Blues")
@@ -30,6 +33,7 @@ def plot_conf_matrix(y_pred, y_test):
     plt.ylabel('Actual')
     plt.savefig('confusion_matrix.png')
 
+# roman numerals for minor and major
 def get_roman_numerals():
     # C major (no vii-dim)
     I = np.array([1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0]) # Cmaj
@@ -63,6 +67,7 @@ def get_roman_numerals():
         "VII": VII
     }
 
+# building the model for chord progressions
 def build_model(m):
     if (m != 'major' and m != 'minor'):
         raise Exception("input string m is not equal to 'major' or 'minor'.")
