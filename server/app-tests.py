@@ -55,6 +55,22 @@ class TestApp(unittest.TestCase):
         self.assertIn('userid', data)
         self.assertEqual(data['username'], 'testuser')
 
+    # test user registration with duplicate fields (should throw an error)
+    def test_user_reg_missing_fields(self):
+        response1 = self.client.post('/api/create_user', json={
+            'username': 'testuser',
+            'password': 'testpassword'
+        })
+        self.assertEqual(response1.status_code, 200)
+
+        response2 = self.client.post('/api/create_user', json={
+            'username': 'testuser',
+            'password': 'password'
+        })
+        self.assertEqual(response2.status_code, 404)
+        self.assertIn('error', json.loads(response2.data))
+        self.assertEqual(json.loads(response2.data)['error'], 'username already exists.')
+
     # test login
     def test_user_login(self):
         self._create_test_user()
