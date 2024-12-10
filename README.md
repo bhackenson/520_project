@@ -30,7 +30,7 @@ After doing that, open a new terminal and `cd` into the `server` folder. Make a 
 
 ## AI Models
 
-The `json` file will store a user's requested chord progression as a string separated by `|`. The frontend requests a melody by providing this string. The backend converts the string into a list of 12-length binary vectors that denote which pitches are played in each chord. This array acts as a "seed" for a Sequential model that predicts what the next note of a melody will be (since chords and melodies are highly correlated). There is another field in the `json` file that stores this melody sent by the backend.
+The `json` file will store a user's requested chord progression as an array of chord objects, each object having a chord name and an array of strings denoting which notes are in the chord. The frontend requests a melody by providing this string. The backend converts the string into a list of 12-length binary vectors that denote which pitches are played in each chord. This array acts as a "seed" for a Sequential model that predicts what the next note of a melody will be (since chords and melodies are highly correlated). There is another field in the `json` file that stores this melody sent by the backend.
 
 There are libraries that can handle the conversion of chords as strings to pitches, particularly `music21`, which aids in music computation projects like this one.
 
