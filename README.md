@@ -6,7 +6,7 @@ _Mus(ai)c_ is an AI-powered music application where users can create projects an
 
 ## Install
 
-Due to Mus(ai)c's nature as a web-app, since we are not currently hosting you can run a locally hosted version by cloning this repo, navigating to `frontend-svelte`, and then execute `npm i`. Once everything is installed, execute `npm run dev`.
+Due to Mus(ai)c's nature as a web-app, since we are not currently hosting you can run a locally hosted version by cloning this repository, navigating to `frontend-svelte` folder, and then execute `npm i`. Once everything is installed, execute `npm run dev`.
 
 After doing that, then open a new terminal and `cd` into the `server` folder. Make a new file called `db.json` with empty curly braces. Create and activate a [virtual environment](https://python.land/virtual-environments/virtualenv) for Python, and then execute `pip install -r requirements.txt`. After that, run `python app.py`.
 
