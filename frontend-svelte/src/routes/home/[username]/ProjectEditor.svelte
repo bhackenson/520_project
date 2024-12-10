@@ -200,7 +200,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 100%;
+    height: 80vh;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -262,6 +262,7 @@ header .button {
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+		overflow: auto;
 }
 
 .projects-section {
