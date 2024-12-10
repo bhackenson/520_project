@@ -4,11 +4,23 @@
 
 _Mus(ai)c_ is an AI-powered music application where users can create projects and input chord progressions, and the AI will generate a melody over it, allowing users to explore their musical ideas and compositions!
 
-## Install
+## Install and Deploy
 
-Due to Mus(ai)c's nature as a web-app, since we are not currently hosting you can run a locally hosted version by cloning this repository, navigating to `frontend-svelte` folder, and then execute `npm i`. Once everything is installed, execute `npm run dev`.
+Due to Mus(ai)c's nature as a web-app, since we are not currently hosting you can run a locally hosted version by cloning this repository, navigate to the `frontend-svelte` folder, and then execute `npm i`. Once everything is installed, execute `npm run dev`.
 
-After doing that, then open a new terminal and `cd` into the `server` folder. Make a new file called `db.json` with empty curly braces. Create and activate a [virtual environment](https://python.land/virtual-environments/virtualenv) for Python, and then execute `pip install -r requirements.txt`. After that, run `python app.py`.
+> ### Terminal Commands
+> 1. `cd frontend-svelte`
+> 2. `npm i`
+> 3. `npm run dev`
+
+After doing that, open a new terminal and `cd` into the `server` folder. Make a new file called `db.json` with empty curly braces. Create and activate a [virtual environment](https://python.land/virtual-environments/virtualenv) for Python, and then execute `pip install -r requirements.txt`. After that, run `python app.py`. Open the `localhost` link in your browser.
+
+> ### Terminal Commands
+> 1. `cd server`
+> 2. `conda create --name musaic python=3.11.2`
+> 3. `conda activate musaic`
+> 4. `pip install -r requirements.txt`
+> 5. `python app.py`
 
 <!-- ## Configuration (?) -->
 
