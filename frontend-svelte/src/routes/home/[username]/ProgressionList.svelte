@@ -6,6 +6,13 @@
     export let userid;
     export let project;
 
+    let progs = []
+    Store.subscribe((userdata) => {
+        console.log(project)
+        if (Object.keys(project).length == 0) { progs = []; }
+        else { progs = userdata['projects'].find(p => p['id'] == project['id'])['progressions'] }
+    })
+
     // const synth = new Tone.PolySynth(Tone.AMSynth).toDestination();
     let sampler = new Tone.Sampler({
         urls: {
@@ -235,7 +242,7 @@
 
 
 </script>
-{#each project['progressions'] as prog (prog.id)}
+{#each progs as prog (prog.id)}
     <div class='title'>
         <div class="progression-text">{prog['name']}</div>
         <div class="progression">
