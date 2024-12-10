@@ -15,8 +15,8 @@
 
 ### Craig Bilelis
 
-- Worked on frontend, including bugfix for current backend, and developed for initial concept frontend in Next.JS, further down the line scrapped for Svelte instead.
-  -Helped with documentation in `README`
+- Worked on frontend, including bugfix for current backend, and developed for initial concept frontend in Next.JS, further down the line scrapped for Svelte instead
+- Helped with documentation in `README`
 - Worked on the [Presentation Slides](https://docs.google.com/presentation/d/1FeDPJGiS6mcSV5RTQD97QPQPcg_DqkfDDEI-0ZKV8SM/edit?usp=sharing) for the Project Proposal Meeting and Final Project Fair
 - Added `.mailmap` for account consolidation
 - Kept repository clean through branch/commit management
