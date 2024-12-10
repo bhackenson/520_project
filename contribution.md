@@ -17,7 +17,9 @@
 
 
 ### Sreya Nimmagadda
--
+- Worked on the frontend to create some of features using HTML and CSS.
+- Worked on the initial project proposal slides and created the use case diagrams.
+- Worked on the final project fair presentation slides. [Presentation Slides](https://docs.google.com/presentation/d/1FeDPJGiS6mcSV5RTQD97QPQPcg_DqkfDDEI-0ZKV8SM/edit?usp=sharing)
 
 ### Craig Bilelis
 - Worked on frontend, including bugfix for current backend, and developed for initial concept frontend in Next.JS, further down the line scrapped for Svelte instead
