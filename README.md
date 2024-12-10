@@ -36,16 +36,16 @@ The user can also listen to the melody directly in the browser with the `Tone.js
 
 ## Features
 - Account Manager
-> user login & signup
-> change account info
+> - user login & signup
+> - change account info
 - Project Editor
-> create, edit, and delete projects
-> create, edit, and delete progressions
+> - create, edit, and delete projects
+> - create, edit, and delete progressions
 - AI Generation
-> generate melodies using the AI model
+> - generate melodies using the AI model
 - Song Playback
-> playback the generated music
+> - playback the generated music
 - Collaboration
-> export MIDI file to share
+> - export MIDI file to share
 - Feedback Evaluation
-> form to receive feedback about the generated music
+> - form to receive feedback about the generated music
