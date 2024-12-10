@@ -33,3 +33,19 @@ The `json` file will store a user's requested chord progression as a string sepa
 There are libraries that can handle the conversion of chords as strings to pitches, particularly `music21`, which aids in music computation projects like this one.
 
 The user can also listen to the melody directly in the browser with the `Tone.js` library, which abstracts the browser's audio context to work nicely with rhythmic sound, like music melodies. They will also have the option to download the melody as a `MIDI` file that can be opened in programs like MuseScore. `music21` supports this conversion.
+
+## Features
+- Account Manager
+> user login & signup
+> change account info
+- Project Editor
+> create, edit, and delete projects
+> create, edit, and delete progressions
+- AI Generation
+> generate melodies using the AI model
+- Song Playback
+> playback the generated music
+- Collaboration
+> export MIDI file to share
+- Feedback Evaluation
+> form to receive feedback about the generated music
