@@ -6,6 +6,7 @@
   
     export let userid;
     export let updateProj = (i) => {};
+
     const update = (i) => {
         updateProj(i);
         Store.update((userdata) => {return userdata;});
@@ -84,6 +85,8 @@
         Store.update((userata) => {
             return data2.user;
         })
+
+        update({});
     }
   
   </script>

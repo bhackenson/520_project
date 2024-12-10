@@ -8,9 +8,12 @@
 
     let progs = []
     Store.subscribe((userdata) => {
-        console.log(project)
         if (Object.keys(project).length == 0) { progs = []; }
-        else { progs = userdata['projects'].find(p => p['id'] == project['id'])['progressions'] }
+        else { 
+            let p = userdata['projects'].find(p => p['id'] == project['id'])
+            if (p && Object.hasOwn(p, "progressions")) {progs = p['progressions'];}
+            else {progs = [];}
+        }
     })
 
     // const synth = new Tone.PolySynth(Tone.AMSynth).toDestination();

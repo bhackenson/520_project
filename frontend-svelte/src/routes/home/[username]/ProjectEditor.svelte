@@ -200,7 +200,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 80vh;
+    /* height: 100vh; */
     padding: 20px;
     box-sizing: border-box;
 }
@@ -253,7 +253,7 @@ header .button {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 100%;
+    height: 80vh;
 }
 
 .projects-section,

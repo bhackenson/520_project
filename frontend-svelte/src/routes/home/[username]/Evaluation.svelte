@@ -26,6 +26,7 @@
     StoreEval.subscribe((progs) => {
         prog1 = progs.prog1;
         prog2 = progs.prog2;
+        currSelected = progs.prog1;
     });
 
     const submit = async () => {
