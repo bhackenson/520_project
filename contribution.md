@@ -5,6 +5,7 @@
 - Worked on the [Presentation Slides](https://docs.google.com/presentation/d/1FeDPJGiS6mcSV5RTQD97QPQPcg_DqkfDDEI-0ZKV8SM/edit?usp=sharing) for the Project Proposal Meeting and Final Project Fair
 - Worked on code documentation and comments
 - Tested installation and deployment
+- Implemented test code
 
 ### Bret Hackenson
 -
