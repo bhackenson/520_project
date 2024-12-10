@@ -48,6 +48,7 @@ with app.app_context():
 def handle_exception(e):
     return jsonify({'error': 'Unexpected error', 'description': str(e)}), 500
 
+# user authentication
 def authenticate_user(f):
     @wraps(f)
     def wrapper(*args, **kwargs):
@@ -64,6 +65,7 @@ def authenticate_user(f):
             return jsonify({"error": "invalid token"}), 400
     return wrapper
 
+# get user info
 @app.route('/api/get_user', methods=['GET'])
 @authenticate_user
 def get_user():
@@ -74,6 +76,7 @@ def get_user():
     
     return jsonify({"status": "OK", "user": user.to_json()}), 200
 
+# user login
 # request input: {"username": "username", "password": "password"}
 @app.route('/api/login', methods=['POST'])
 def login():
@@ -90,6 +93,7 @@ def login():
     else:
         return jsonify({"error": "Incorrect password"}), 404
 
+# logging out user
 @app.route('/api/logout', methods=['POST'])
 @authenticate_user
 def logout():
@@ -98,6 +102,7 @@ def logout():
     return jsonify({"status": "OK", "token": token}), 200
 
 # request input: {"username": "username", "password": "password"}
+# creating/signing up/registering a new user
 @app.route('/api/create_user', methods=['POST'])
 def register():
     try:
@@ -131,6 +136,7 @@ def register():
         return jsonify({"error": "invalid query error"}), 404
 
 # request input: {"name": "project_name", "date": "project_date"}
+# creating a new project
 @app.route('/api/create_project', methods=['POST'])
 @authenticate_user
 def create_project():
@@ -155,6 +161,7 @@ def create_project():
     return jsonify({"status": "OK", "projid": projid, "project": project.to_json()}), 200
 
 # request input: {"projid": "proj_id", "name": "prog_name", "key_signature": "B-", "mode": "major", "time_signature": "4/4", "tempo": 120}
+# create a new progression
 @app.route('/api/create_progression', methods=['POST'])
 @authenticate_user
 def generate_progression():
@@ -220,6 +227,7 @@ request input:
   ]
 }
 """
+# updating a progression
 @app.route('/api/update_progression', methods=['PUT'])
 @authenticate_user
 def update_progression():
@@ -258,6 +266,7 @@ def update_progression():
     return jsonify({"status": "OK", "new_progression": new_progression.to_json()}), 200
 
 # request input: {"projid": "proj_id"}
+# deleting a project
 @app.route('/api/delete_project', methods=['PUT'])
 @authenticate_user
 def delete_project():
@@ -279,6 +288,7 @@ def delete_project():
     return jsonify({"status": "OK", "projid": projid}), 200
 
 # request input: {"projid": "proj_id", "progid": "prog_id"}
+# deleting a progression
 @app.route('/api/delete_progression', methods=['PUT'])
 @authenticate_user
 def delete_progression():
@@ -305,6 +315,7 @@ def delete_progression():
     return jsonify({"status": "OK", "progid": progid}), 200
 
 # request input: {"name": "prog_name", "key_signature": "B-", "mode": "major", "time_signature": "4/4", "tempo": 120}
+# get progression info
 @app.route('/api/get_progression', methods=['POST'])
 @authenticate_user
 def get_progression():
@@ -359,6 +370,7 @@ request input:
   ]
 }
 """
+# send the progression
 @app.route('/api/send_progression', methods=['POST'])
 @authenticate_user
 def send_progression():
@@ -435,6 +447,7 @@ request input:
     "comment": "comment here"
 }
 """
+# feedback/evaluation info
 @app.route('/api/feedback', methods=['POST'])
 def feedback():
     with open('feedback.json', 'r') as file:
