@@ -183,7 +183,7 @@
             <div class="progressions-section">
                 <div class="header">
                     <div class="progressions-text">Progressions</div>
-                    <button class="add-btn" on:click={openProgCreate}>+</button>
+                    <button class="add-btn" on:click={openProgCreate} style:visibility={Object.keys(currProj).length > 0 ? 'visible' : 'hidden'}>+</button>
                     <ProgressionCreate visible={isProgCreateVisible} close={closeProgCreate} getProgs={get_progs} userid={userid} project={currProj}/>
                 </div>
 
