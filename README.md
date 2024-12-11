@@ -51,3 +51,7 @@ The user can also listen to the melody directly in the browser with the `Tone.js
 > - export MIDI file to share
 - Feedback Evaluation
 > - form to receive feedback about the generated music
+
+## Video Demo
+
+The video demo can be found [here](https://drive.google.com/file/d/1wzi8RJk6yEK0xowyPAbia3wUO4ZpguAc/view?usp=sharing).
