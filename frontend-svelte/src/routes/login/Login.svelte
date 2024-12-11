@@ -59,7 +59,7 @@
         </div>
         <div id="password-box"></div>
         <div id="enter-password">
-            <input type="text" class="input" bind:value={password} name="login_password" placeholder="Enter Password">
+            <input type="password" class="input" bind:value={password} name="login_password" placeholder="Enter Password">
         </div>
         <div id="login-box"></div>
         <div id="no-account">
@@ -117,7 +117,8 @@
     width: 532px;
     height: 145px;
     position: absolute;
-    left: 454px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 68px;
     text-align: center;
     color: #0F3A57;
@@ -131,7 +132,8 @@
     width: 578px;
     height: 36px;
     position: absolute;
-    left: 431px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 213px;
     text-align: center;
     color: #185D8B;
@@ -145,7 +147,8 @@
     width: 235px;
     height: 67px;
     position: absolute;
-    left: 603px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 291px;
     text-align: center;
     color: #0F3A57;
@@ -160,7 +163,8 @@
     width: 724px;
     height: 96px;
     position: absolute;
-    left: 358px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 381px;
     background: #63B0E3;
 }
@@ -170,7 +174,8 @@
     width: 663px;
     height: 60px;
     position: absolute;
-    left: 389px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 399px;
     text-align: center;
     color: #EEF6FC;
@@ -185,7 +190,8 @@
     width: 724px;
     height: 96px;
     position: absolute;
-    left: 358px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 527px;
     background: #97CAED;
 }
@@ -195,7 +201,8 @@
     width: 663px;
     height: 60px;
     position: absolute;
-    left: 389px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 545px;
     text-align: center;
     color: #185D8B;
@@ -210,7 +217,8 @@
     width: 317px;
     height: 96px;
     position: absolute;
-    left: 562px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 673px;
     background: #3498DB;
 }
@@ -220,7 +228,8 @@
     width: 235px;
     height: 67px;
     position: absolute;
-    left: 603px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 687px;
     text-align: center;
     color: #CBE5F6;
@@ -235,7 +244,8 @@
     width: 532px;
     height: 36px;
     position: absolute;
-    left: 454px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 819px;
     text-align: center;
     color: #0F3A57;
