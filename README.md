@@ -24,7 +24,7 @@ After doing that, open a new terminal and `cd` into the `server` folder. Make a 
 > 4. `pip install -r requirements.txt`
 > 5. `python app.py`
 
-Alternatively, Docker images of the client and server can be built by navigating to the `docker-support` branch and running `docker compose up -d`. The command will build the images and open a container for the client at port `3000` and for the server at port `5000`. To close the containers, run `docker compose down`.
+Alternatively, Docker images of the client and server can be built by running `docker compose up -d`. The command will build the images and open a container for the client at port `3000` and for the server at port `5000`. To close the containers, run `docker compose down`.
 
 <!-- ## Configuration (?) -->
 
