@@ -117,7 +117,8 @@
     width: 532px;
     height: 145px;
     position: absolute;
-    left: 454px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 68px;
     text-align: center;
     color: #0F3A57;
@@ -131,7 +132,8 @@
     width: 578px;
     height: 36px;
     position: absolute;
-    left: 431px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 213px;
     text-align: center;
     color: #185D8B;
@@ -145,7 +147,8 @@
     width: 235px;
     height: 67px;
     position: absolute;
-    left: 603px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 282px;
     text-align: center;
     color: #0F3A57;
@@ -160,7 +163,8 @@
     width: 724px;
     height: 96px;
     position: absolute;
-    left: 358px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 372px;
     background: #63B0E3;
 }
@@ -170,7 +174,8 @@
     width: 663px;
     height: 60px;
     position: absolute;
-    left: 389px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 390px;
     text-align: center;
     color: #EEF6FC;
@@ -185,7 +190,8 @@
     width: 724px;
     height: 96px;
     position: absolute;
-    left: 358px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 501px;
     background: #97CAED;
 }
@@ -195,7 +201,8 @@
     width: 663px;
     height: 60px;
     position: absolute;
-    left: 389px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 519px;
     text-align: center;
     color: #185D8B;
@@ -210,7 +217,8 @@
     width: 724px;
     height: 96px;
     position: absolute;
-    left: 358px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 630px;
     background: #3498DB;
 }
@@ -220,7 +228,8 @@
     width: 663px;
     height: 60px;
     position: absolute;
-    left: 389px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 648px;
     text-align: center;
     color: #CBE5F6;
@@ -235,7 +244,8 @@
     width: 317px;
     height: 96px;
     position: absolute;
-    left: 562px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 759px;
     background: #2280BF;
 }
@@ -245,7 +255,8 @@
     width: 235px;
     height: 67px;
     position: absolute;
-    left: 603px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 773px;
     text-align: center;
     color: #EEF6FC;
@@ -260,7 +271,8 @@
     width: 532px;
     height: 36px;
     position: absolute;
-    left: 454px;
+    left: 50%;
+		transform: translateX(-50%);
     top: 888px;
     text-align: center;
     color: #0F3A57;
