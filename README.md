@@ -26,7 +26,9 @@ Alternatively, Docker images of the client and server can be built by navigating
 
 <!-- ## Configuration (?) -->
 
-<!-- ## Data Sets (?) -->
+## Data Sets
+
+In the `server` folder, we have a `dataset.csv` file, which covers the dataset information we used during our development.
 
 ## AI Models
 
