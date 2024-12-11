@@ -2,10 +2,17 @@
 
 ### Soniya Gaikwad
 - Worked on the `ui-design` folder that consists of all the baseline HTML and CSS code for the UI/UX of the application that is later implemented in the `frontend-svelte` folder using [Figma](https://www.figma.com/design/g7HDzd1IFFMkCYCwEtCxLy/Mus(ai)c-UI---COMPSCI520?node-id=2-62&t=3fBB0haAvIVYQVXA-1)
+> - Account Info Page: `account-info-html.html` & `account-info.css` 
+> - Create Account Page: `create-account-html.html` & `create-account.css`
+> - Landing Screen: `landing-screen-html.html` & `landing-screen.css`
+> - Login Page: `login-screen-html.html` & `login-screen.css`
+> - Project Editor Page: `project-editor-html.html` & `project-editor.css`
+> - Share Project Page: `share-project-html.html` & `share-project.css`
+> - Designs: `ui-original-designs.pdf`
 - Worked on the [Presentation Slides](https://docs.google.com/presentation/d/1FeDPJGiS6mcSV5RTQD97QPQPcg_DqkfDDEI-0ZKV8SM/edit?usp=sharing) for the Project Proposal Meeting and Final Project Fair
-- Worked on code documentation and comments
-- Tested installation and deployment
-- Implemented test code
+- Worked on code documentation and comments for `python` files in the `server` folder
+- Tested installation and deployment instructions in `README.md` with Terminal commands
+- Implemented backend test code in `app-tests.py` 
 
 ### Bret Hackenson
 - Created the AI chord generation model in `generator.py` that predicts the next chord in a current sequence of chords, with each chord represented by a 12-length binary vector denoting which pitches are active (`1`) and not active (`0`). Libraries include Tensorflow (Sequential model) and music21 for computer-aided musical analysis. Dataset in `dataset.csv`, a subset of the dataset provided by [this repository](https://github.com/ology/Data-Dataset-ChordProgressions/tree/master).
@@ -14,7 +21,6 @@
 - Created rendering of sheet music on the client using the VexFlow npm library
 - Implemented the playback and export features, with the playback feature using the Tone.JS npm library for high-level interaction with the browser's audio context
 - Aided in providing functionality to Svelte implementation of frontend
-
 
 ### Sreya Nimmagadda
 - Worked on the frontend to create some of features using HTML and CSS.
