@@ -9,6 +9,7 @@ _Mus(ai)c_ is an AI-powered music application where users can create projects an
 Due to Mus(ai)c's nature as a web-app, since we are not currently hosting you can run a locally hosted version by cloning this repository, navigate to the `frontend-svelte` folder, and then execute `npm i`. Once everything is installed, execute `npm run dev`.
 
 > ### Terminal Commands
+>
 > 1. `cd frontend-svelte`
 > 2. `npm i`
 > 3. `npm run dev`
@@ -16,6 +17,7 @@ Due to Mus(ai)c's nature as a web-app, since we are not currently hosting you ca
 After doing that, open a new terminal and `cd` into the `server` folder. Make a new file called `db.json` with empty curly braces. Create and activate a [virtual environment](https://python.land/virtual-environments/virtualenv) for Python or [conda environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html), and then execute `pip install -r requirements.txt`. After that, run `python app.py`. Open the `localhost` link in your browser.
 
 > ### Terminal Commands
+>
 > 1. `cd server`
 > 2. `conda create --name musaic python=3.11.2`
 > 3. `conda activate musaic`
@@ -39,21 +41,18 @@ There are libraries that can handle the conversion of chords as strings to pitch
 The user can also listen to the melody directly in the browser with the `Tone.js` library, which abstracts the browser's audio context to work nicely with rhythmic sound, like music melodies. They will also have the option to download the melody as a `MIDI` file that can be opened in programs like MuseScore. `music21` supports this conversion.
 
 ## Features
+
 - Account Manager
-> - user login & signup
-> - change account info
+  > - user login & signup
+  > - change account info
 - Project Editor
-> - create, edit, and delete projects
-> - create, edit, and delete progressions
+  > - create, edit, and delete projects
+  > - create, edit, and delete progressions
 - AI Generation
-> - generate melodies using the AI model
+  > - generate melodies using the AI model
 - Song Playback
-> - playback the generated music
+  > - playback the generated music
 - Collaboration
-> - export MIDI file to share
+  > - export MIDI file to share
 - Feedback Evaluation
-> - form to receive feedback about the generated music
-
-## Video Demo
-
-The video demo can be found [here](https://drive.google.com/file/d/1wzi8RJk6yEK0xowyPAbia3wUO4ZpguAc/view?usp=sharing).
+  > - form to receive feedback about the generated music
