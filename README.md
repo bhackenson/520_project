@@ -4,6 +4,10 @@
 
 _Mus(ai)c_ is an AI-powered music application where users can create projects and input chord progressions, and the AI will generate a melody over it, allowing users to explore their musical ideas and compositions!
 
+## Video Demo
+
+The video demo can be found [here](https://drive.google.com/file/d/1wzi8RJk6yEK0xowyPAbia3wUO4ZpguAc/view?usp=sharing).
+
 ## Install, Deploy, and Configuration
 
 Due to Mus(ai)c's nature as a web-app, since we are not currently hosting you can run a locally hosted version by cloning this repository, navigate to the `frontend-svelte` folder, and then execute `npm i`. Once everything is installed, execute `npm run dev`.
@@ -56,7 +60,3 @@ The user can also listen to the melody directly in the browser with the `Tone.js
   > - export MIDI file to share
 - Feedback Evaluation
   > - form to receive feedback about the generated music
-
-## Video Demo
-
-The video demo can be found [here](https://drive.google.com/file/d/1wzi8RJk6yEK0xowyPAbia3wUO4ZpguAc/view?usp=sharing).
