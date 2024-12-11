@@ -56,7 +56,7 @@
         </div>
         <div id="password-box"></div>
         <div id="enter-password">
-            <input type="text" class="input" bind:value={password1} name="login_password" placeholder="Enter Password">
+            <input type="password" class="input" bind:value={password1} name="login_password" placeholder="Enter Password">
         </div>
         <div id="confirm-password-box"></div>
         <div id="confirm-password">
